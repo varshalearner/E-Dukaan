@@ -1,0 +1,104 @@
+<%- layout('layout/boilerplate') -%>
+<div class="">
+  <div class="flex justify-around">
+    <div
+      class="flex flex-col w-80 p-2 m-2 border-2 drop-shadow border-gray-200 bg-cover bg-center rounded hover:drop-shadow-2xl"
+    >
+      <img src="<%= product.img %>" class="w-80 rounded object-cover" />
+      <div class="flex flex-col card-body p-2">
+        <h5 class="card-name font-bold capitalize"><%= product.name %></h5>
+        <p class="card-des text-xs"><%= product.desc %></p>
+        <h5 class="card-price py-2">Rs <%= product.price %></h5>
+      </div>
+      <div class="flex gap-2">
+        <a
+          href="#"
+          class="grow text-center text-white bg-blue-500 px-2 py-1 rounded"
+          >Buy</a
+        >
+        <a
+          href="#"
+          class="grow text-center text-white bg-blue-500 px-2 py-1 rounded"
+          >Add to Cart</a
+        >
+        <a
+          href="/products/<%=product._id%>/edit"
+          class="grow text-center text-white bg-blue-500 px-2 py-1 rounded"
+          >Edit</a
+        >
+        <form action="/products/<%=product._id%>?_method=DELETE" method="POST">
+          <button
+            class="grow text-center text-white bg-red-500 px-2 py-1 rounded"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- review section -->
+  <div class="p-4">
+    <h5 class="text-2xl mt-2 font-semibold">Leave Your review</h5>
+    <!-- form for review -->
+    <form action="/products/<%=product._id%>/review" method="POST">
+      <div>
+        <fieldset class="starability-basic">
+          <input type="radio" id="first-rate1" name="rating" value="1" />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input type="radio" id="first-rate2" name="rating" value="2" />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input type="radio" id="first-rate3" name="rating" value="3" />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input type="radio" id="first-rate4" name="rating" value="4" />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input type="radio" id="first-rate5" name="rating" value="5" />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+      </div>
+
+      <div class="flex-col">
+        <label
+          for="comment"
+          class="block mb-2 text-sm font-medium text-gray-900"
+          >Comment</label
+        >
+        <textarea
+          name="comment"
+          id="comment"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          placeholder="Write your review"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="grow text-center text-white bg-blue-500 px-2 py-1 rounded"
+      >
+        Submit
+      </button>
+    </form>
+    <div class="my-3">
+      <% for (let review of product.reviews) { %>
+      <div class="bg-white shadow-md p-4 mb-3">
+        <div class="flex items-center mb-2">
+          <p class="starability-result" 
+          data-rating=<%= review.rating %> >Rated: 3 stars</p>
+          <button
+            class="ml-auto px-2 py-1 bg-red-500 text-white rounded text-sm"
+          >
+            Delete
+          </button>
+        </div>
+        <p class="text-gray-700"><%= review.comment %></p>
+        <p class="text-gray-700"><%= review.createdAt %></p>
+        <p class="text-gray-700">
+           <% if(review.updatedAt){ %>
+            <%= review.updatedAt.toDateString() %>
+           <% }%>
+        </p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>

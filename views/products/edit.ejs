@@ -1,0 +1,24 @@
+<%- layout('layout/boilerplate') -%>
+
+<div class="flex flex-col ">
+    <form class="w-96 mx-auto mt-10 "  action="/products/<%= product._id %>?_method=PATCH" method="POST">
+        <div class="mb-5">
+      <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Product Name</label>
+      <input type="text" id="name" name="name" value="<%=product.name%>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name" required>
+    </div>
+    <div class="mb-5">
+      <label for="img" class="block mb-2 text-sm font-medium text-gray-900">Image Url</label>
+      <input type="text" id="img" name="img"  value="<%=product.img%>" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="image url" required>
+    </div>
+    <div class="mb-5">
+      <label for="desc" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+      <textarea id="desc" col="5" name="desc"  class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="description" required><%=product.desc%></textarea>
+    </div>
+    <div class="mb-5">
+      <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Price</label>
+      <input type="number" name="price"  value="<%=product.price%>" min="0" id="price" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="price" required>
+    </div>
+  
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save Changes</button>
+  </form>
+</div>
